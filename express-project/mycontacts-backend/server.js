@@ -1,10 +1,11 @@
 // This line requires the Express module.
 const express = require('express');
+const connectDb = require('./config/dbConnection');
 const errorHandler = require('./routes/middleware/errorHandler');
 
 // This line requires the dotenv module and loads the environment variables from a .env file.
 const dotenv = require('dotenv').config();
-
+connectDb();
 // This line creates a new Express application.
 const app = express();
 

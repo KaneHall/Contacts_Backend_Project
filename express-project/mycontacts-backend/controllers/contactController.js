@@ -1,46 +1,53 @@
-// edscribe get all contacts
-//route GET /api/contacts
-//access public
+const asyncHandler = require("express-async-handler");
 
-const getContacts = async (req,res) => {
-    res.status(201).json({message: "Get all contacts"})
-};
+// Describe get all contacts
+// Route GET /api/contacts
+// Access public
+const getContacts = asyncHandler((req, res) => {
+  res.status(201).json({ message: "Get all contacts" });
+});
 
-// edscribe create new contact
-//route POST /api/contacts
-//access public
-
-const createContact = async (req,res) => {
-    console.log('The request body is:', req.body);
-    const {name, email, phone } = req.body
-    if(!name || !email || !phone){
+// Describe create new contact
+// Route POST /api/contacts
+// Access public
+const createContact = asyncHandler((req, res) => {
+  console.log('The request body is:', req.body);
+  const { name, email, phone } = req.body;
+  
+  // Check if required fields are populated
+  if (!name || !email || !phone) {
     res.status(400);
-    throw new Error("All fields must be populated.")
-}
-    res.status(201).json({message: "Create contacts"})
+    throw new Error("All fields must be populated.");
+  }
+  
+  res.status(201).json({ message: "Create contacts" });
+});
+
+// Describe get contact
+// Route GET /api/contacts/:id
+// Access public
+const getContact = asyncHandler((req, res) => {
+  res.status(201).json({ message: `Update for contact ${req.params.id}` });
+});
+
+// Describe update contact
+// Route PUT /api/contacts/:id
+// Access public
+const updateContact = asyncHandler((req, res) => {
+  res.status(201).json({ message: `Update for contact ${req.params.id}` });
+});
+
+// Describe delete contact
+// Route DELETE /api/contacts/:id
+// Access public
+const deleteContact = asyncHandler((req, res) => {
+  res.status(201).json({ message: `Delete for contact ${req.params.id}` });
+});
+
+module.exports = {
+  getContacts,
+  createContact,
+  getContact,
+  updateContact,
+  deleteContact,
 };
-
-// edscribe gridTemplateColumns:  all contact
-//route get /api/contacts/:id
-//access public
-
-const getContact = async ((req, res) => {
-    res.status(201).json({message: `Update for contact for ${req.params.id}`});
-  });
-
-// edscribe Update contact
-//route PUT /api/contacts/:id
-//access public
-
-const updateContact =  async ((req, res) => {
-    res.json({message: `Update for contact for ${req.params.id}`}).status(201);
-  });
-
-  // describe Delete contact
-//route DELETE /api/contacts/:id
-//access public
-
-const deleteContact =  async ((req, res) => {
-    res.json({message: `Delete for contact for ${req.params.id}`}).status(201);
-  });
-module.exports = {getContacts, createContact, getContact, updateContact, deleteContact  }
