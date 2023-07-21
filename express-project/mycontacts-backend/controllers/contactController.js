@@ -16,19 +16,23 @@ const getContacts = asyncHandler(async (req, res) => {
 // Describe create new contact
 // Route POST /api/contacts
 // Access public
-const createContact = asyncHandler((req, res) => {
+const createContact = asyncHandler(async (req, res) => {
   console.log('The request body is:', req.body);
   const { name, email, phone } = req.body;
   
-  // Check if required fields are populated
-  if (!name || !email || !phone) {
-    // If any required field is missing, respond with a 400 Bad Request status and throw an error
+       // Check if required fields are populated
+    if (!name || !email || !phone) {
+      // If any required field is missing, respond with a 400 Bad Request status and throw an error
     res.status(400);
     throw new Error("All fields must be populated.");
-  }
-  
+    }
+     const contact = await Contact.create({
+    name, 
+    email,
+    phone
+  })
   // Respond with a success message indicating that the contact is created
-  res.status(201).json({ message: "Create contacts" });
+  res.status(201).json(contact);
 });
 
 
