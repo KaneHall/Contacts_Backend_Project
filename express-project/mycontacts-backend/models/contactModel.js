@@ -10,10 +10,10 @@ const contactsSchema = mongoose.Schema(
     type: String,
     required: [true, 'Please add the email address'],
   },
-  phpne: {
+  phone: {
     type: String,
     required: [true, 'Please add the phone number'],
-  } 
+  },
 },
 {
     timestamps: true,

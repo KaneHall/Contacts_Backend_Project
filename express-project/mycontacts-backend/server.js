@@ -1,7 +1,7 @@
 // This line requires the Express module.
 const express = require('express');
 const connectDb = require('./config/dbConnection');
-const errorHandler = require('./routes/middleware/errorHandler');
+const errorHandler = require('./middleware/errorHandler');
 
 // This line requires the dotenv module and loads the environment variables from a .env file.
 const dotenv = require('dotenv').config();
@@ -20,5 +20,5 @@ app.listen(PORT, () => {
 app.use(express.json());
 // This line uses the app.use() method to mount the contactRoutes module at the /api/contacts path.
 app.use('/api/contacts', require('./routes/contactRoutes'));
-
+app.use('/api/users', require('./routes/userRoutes'));
 app.use(errorHandler);
