@@ -6,7 +6,7 @@ const Contact = require('../models/contactModel');
 // Access public
 const getContacts = asyncHandler(async (req, res) => {
   // Fetch all contacts from the database using the Contact model
-  const contacts = await Contact.find();
+  const contacts = await Contact.find({user_id: req.user.id});
   
   // Respond with the fetched contacts as JSON data
   res.status(200).json({ contacts });

@@ -5,7 +5,8 @@ const express = require("express");
 const router = express.Router();
 
 // Import the getContacts function from the contactController module.
-const {getContacts, createContact, getContact, updateContact, deleteContact } = require("../controllers/contactController")
+const {getContacts, createContact, getContact, updateContact, deleteContact } = require("../controllers/contactController");
+const validateToken = require("../middleware/validateTokenHandler");
 
 
 // router.route("/").get(getContacts); // Create a GET route at the root path that calls the getContacts function.
@@ -15,6 +16,7 @@ const {getContacts, createContact, getContact, updateContact, deleteContact } = 
 // router.route("/:id").delete(deleteContact); // Create a DELETE route that matches the path /:id and deletes a contact by ID.
 
 //The above simplified
+router.use(validateToken);
 router.route("/").get(getContacts).post(createContact);
 router.route("/:id").get(getContact).put(updateContact).delete(deleteContact);
 
